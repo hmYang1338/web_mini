@@ -16,7 +16,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
 
 <!-- Navigation Bar -->
 <div class="w3-bar w3-white w3-large">
-  <a href="#index.html" class="w3-bar-item w3-button w3-red w3-mobile">Main</a>
+  <a href="index.html" class="w3-bar-item w3-button w3-red w3-mobile">Main</a>
   
   <a href="add.jsp" class="w3-bar-item w3-button w3-right w3-mobile">Join</a>
   <a href="login.jsp" class="w3-bar-item w3-button w3-right w3-mobile">Login</a>

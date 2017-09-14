@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>Insert title here</title>
+<title>findID.jsp</title>
 </head>
 <body>
-
+	찾을줄 알았지?
 </body>
 </html>
