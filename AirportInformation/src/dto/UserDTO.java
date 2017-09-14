@@ -6,9 +6,13 @@ public class UserDTO {
 	private String name;
 	private String email;
 	
+<<<<<<< HEAD
 	public UserDTO() {
 		super();
 	}
+=======
+	public UserDTO() {}
+>>>>>>> branch 'master' of https://github.com/hmYang1338/web_mini.git
 	public UserDTO(String id, String pwd, String name, String email) {
 		super();
 		this.id = id;

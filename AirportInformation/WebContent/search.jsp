@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<<<<<<< HEAD
 <title>search.jsp</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="css/w3.css">
@@ -24,5 +25,11 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
 </head>
 <body>
 	검색할 것입니다
+=======
+<title>Insert title here</title>
+</head>
+<body>
+
+>>>>>>> branch 'master' of https://github.com/hmYang1338/web_mini.git
 </body>
 </html>
