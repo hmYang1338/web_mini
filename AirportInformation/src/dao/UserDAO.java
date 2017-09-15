@@ -2,6 +2,7 @@
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.sql.DataSource;
@@ -28,7 +29,7 @@ public class UserDAO {
 	 * 회원가입
 	 * @throws SQLException 
 	 */
-	public static int userInsert(UserDTO udo) throws SQLException {
+	public static void userInsert(UserDTO udo) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		String query = "INSERT INTO users VALUES(?,?,?,?)";
@@ -46,7 +47,6 @@ public class UserDAO {
 		} finally {
 			DBUtil.close(con, pstmt);
 		}
-		return 1;
 	}
 
 	/**
@@ -104,6 +104,7 @@ public class UserDAO {
 	public static void userLogin(String id, String pwd) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		ResultSet rset = null;
 		String query = "SELECT id, pwd FROM users WHERE id = ? ";
 		try {
 			con = source.getConnection();
@@ -111,12 +112,12 @@ public class UserDAO {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, id);
 			pstmt.setString(2, pwd);
-			pstmt.executeQuery();
+			rset = pstmt.executeQuery();
 		} catch (SQLException s) {
 			s.printStackTrace();
 			throw s;
 		} finally {
-			DBUtil.close(con, pstmt);
+			DBUtil.close(con, pstmt, rset);
 		}
 	} 
 
@@ -127,15 +128,14 @@ public class UserDAO {
 	public static void userInfo(UserDTO udo) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		ResultSet rset = null;
 		String query = "SELECT * FROM users WHERE id = ? ";
 		try {
 			con = source.getConnection();
 
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, udo.getId());
-
-			pstmt.executeQuery();
-
+			rset = pstmt.executeQuery();
 		} catch (SQLException s) {
 			s.printStackTrace();
 			throw s;

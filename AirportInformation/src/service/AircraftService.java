@@ -22,4 +22,7 @@ public class AircraftService extends HttpServlet {
 		}
 	} // end of service
 
+	public void searchDepartDate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	}
+	
 }

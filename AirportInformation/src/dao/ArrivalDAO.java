@@ -2,6 +2,7 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.sql.DataSource;
@@ -28,18 +29,35 @@ public class ArrivalDAO {
 	public static void searchArrivalAir(ArrivalDTO adt) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		ResultSet rset = null;
 		String query = "SELECT * FROM arrivalInfo";
 		
 		try {
 			con = source.getConnection();
 			
 			pstmt = con.prepareStatement(query);
-			pstmt.executeQuery();
+			rset = pstmt.executeQuery();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			DBUtil.close(con, pstmt);
 		}
+	}
+	
+	public static void searchArrivalDate(String airport) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = "SELECT dscheduledatetime FROM arrivalinfo WHERE airport = ?";
+		
+		/*try {
+			con = source.getConnection();
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, airport);
+			
+		} catch {
+			
+		}*/
 	}
 	
 }
