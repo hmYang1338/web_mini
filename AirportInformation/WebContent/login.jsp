@@ -130,11 +130,12 @@ span.psw {
 <body class="w3-light-grey">
 
 <!-- Navigation Bar -->
-<div class="w3-bar w3-white w3-large">
-  <a href="index.html" class="w3-bar-item w3-button w3-red w3-mobile">Main</a>
-    <a href="add.jsp" class="w3-bar-item w3-button w3-right w3-mobile">Sign Up</a>
-  <button onclick="document.getElementById('id01').style.display='block'" class="w3-bar-item w3-button w3-right w3-mobile" style="width:auto;">Login</button>
-</div>
+
+<nav>
+	<!-- 외부 html 파일을 이 영역에 포함하는 include 지시자 tag -->
+ 	<%@ include file="header.html" %>
+</nav>
+
 </head>
 <body>
 	
@@ -179,16 +180,7 @@ window.onclick = function(event) {
 
 <!-- Footer -->
 <footer class="w3-padding-32 w3-black w3-center w3-margin-top">
-  <h5>Find Us On</h5>
-  <div class="w3-xlarge w3-padding-16">
-    <i class="fa fa-facebook-official w3-hover-opacity"></i>
-    <i class="fa fa-instagram w3-hover-opacity"></i>
-    <i class="fa fa-snapchat w3-hover-opacity"></i>
-    <i class="fa fa-pinterest-p w3-hover-opacity"></i>
-    <i class="fa fa-twitter w3-hover-opacity"></i>
-    <i class="fa fa-linkedin w3-hover-opacity"></i>
-  </div>
-  <p>Powered by <a href="https://www.google.com" target="_blank" class="w3-hover-text-green">Ours</a></p>
+	<%@include file="footer.html" %>
 </footer>
 	
 </body>
