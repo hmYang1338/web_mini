@@ -14,7 +14,11 @@ public class ArrivalDTO {
 		this.airline = airline;
 		this.airport = airport;
 	}
-
+	public ArrivalDTO(String airport) {
+		super();
+		this.airport = airport;
+	}
+	
 	public String getAFlightID() {
 		return AFlightID;
 	}

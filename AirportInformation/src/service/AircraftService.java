@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.ArrivalDAO;
 import dao.DepartDAO;
+import dto.ArrivalDTO;
 
 @WebServlet("/aircraft")
 public class AircraftService extends HttpServlet {
@@ -42,7 +44,7 @@ public class AircraftService extends HttpServlet {
 		String airport = request.getParameter("airport").trim();
 		ArrayList<String> list = null;
 		try {
-			list = DepartDAO.searchDepartDate(airport);
+			list = DepartDAO.searchDepartDate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -59,13 +61,19 @@ public class AircraftService extends HttpServlet {
 	public void searchArriveDate(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		String airport = request.getParameter("airport").trim();
-		ArrayList<String> list = null;
-		try {
-			list = ArrivalDAO.searchArrivalDate(airport);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		request.getRequestDispatcher(list.toString()).forward(request, response);
+//		String airport = request.getParameter("airport").trim();
+//		ArrayList<String> list = null;
+//		try {
+//			list = ArrivalDAO.searchArrivalDate(airport);
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//		request.getRequestDispatcher(list.toString()).forward(request, response);
+	
+		ArrayList allList = ArrivalDAO.searchArrivalAir();
+		request.setAttribute("allList", allList);
+		
+		RequestDispatcher rdp = request.getRequestDispatcher(allList.toString());
+		rdp.forward(request, response);
 	}
 }

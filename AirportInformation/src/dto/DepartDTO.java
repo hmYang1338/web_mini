@@ -14,6 +14,10 @@ public class DepartDTO {
 		this.airline = airline;
 		this.airport = airport;
 	}
+	public DepartDTO(String airport) {
+		super();
+		this.airport = airport;
+	}
 	
 	public String getDFlightID() {
 		return DFlightID;

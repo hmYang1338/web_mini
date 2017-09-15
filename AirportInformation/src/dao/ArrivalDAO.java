@@ -27,40 +27,46 @@ public class ArrivalDAO {
 	 * 도착항공편 조회
 	 * @param adt
 	 */
-	public static void searchArrivalAir(ArrivalDTO adt) {
+	public static ArrayList searchArrivalAir() {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = "SELECT * FROM arrivalInfo";
+		ArrayList<ArrivalDTO> allList = new ArrayList<ArrivalDTO>();
+		String query = "SELECT DISTINCT airport FROM arrivalInfo";
 		
 		try {
 			con = DBUtil.getConnection();
 			pstmt = con.prepareStatement(query);
 			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				allList.add(new ArrivalDTO(rset.getString(1)));
+			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			DBUtil.close(con, pstmt);
+			DBUtil.close(con, pstmt, rset);
 		}
+		return allList;
 	}
 	
 	/** 도착날짜 검색 
 	 * @throws SQLException */
-	public static ArrayList<String> searchArrivalDate(String airport) throws SQLException {
-		ArrayList<String> list = new ArrayList<>();
+	public static ArrayList searchArrivalDate() throws SQLException {
+		ArrayList<ArrivalDTO> list = new ArrayList<ArrivalDTO>();
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = "SELECT ascheduledatetime FROM arrivalinfo WHERE airport = ?";
+		String query = "SELECT DISTINCT ascheduledatetime FROM arrivalinfo";
 		
 		try {
 			con = DBUtil.getConnection();
 			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, airport);
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
-				list.add(rset.getString("airport"));
+				list.add(new ArrivalDTO(rset.getString(1)));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -1,6 +1,10 @@
+<%@page import="dao.DepartDAO"%>
+<%@page import="dao.ArrivalDAO"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="dto.ArrivalDTO, java.util.ArrayList"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -39,29 +43,42 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
 					<option value="inc">인천</option>
 				</select>
 				 &nbsp&nbsp&nbsp&nbsp&nbsp->&nbsp&nbsp&nbsp
+				 <% 
+					List<String> list = DepartDAO.searchDepartAir();
+					session.setAttribute("list", list);
+				 %> 
 				<select name="area">
-					반복문으로 
-					<option value="암스테르담" name="am">암스테르담</option>
-					am = 암스테르담
+					<c:forEach items="${sessionScope.list}" var="data" >
+						<option value="seoul">${data.airport} &nbsp;</option>
+					</c:forEach>
 				</select>
 			</label>
           </div>
           <div class="w3-half">
             <label><i class="fa fa-calendar-o"></i> 출발 일/시 <br>
-				<select name="area">
-					<option value="seoul">서울&nbsp&nbsp &nbsp &nbsp &nbsp &nbsp</option>
-				</select>
-			</label>
+				<% 
+					List<String> list4 = DepartDAO.searchDepartDate();
+					session.setAttribute("list4", list4);
+				 %> 
+				<select>
+					<c:forEach items="${sessionScope.list4}" var="data" >
+						<option>${data.airport} &nbsp;</option>
+					</c:forEach>
+				</select>			</label>
           </div>
         </div>
         <div class="w3-row-padding" style="margin:0 -16px;">
           <div class="w3-half w3-margin-bottom">
             <label><i class="fa fa-calendar-o"></i>&nbsp&nbsp&nbsp&nbsp출발지 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp-> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 도착지 <br>
 				&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-				<select>
-					<option value="seoul">암스테르담</option>
-					<option value="seoul">암스테르담</option>
-					<option value="seoul">암스테르담</option>
+				<% 
+					List<String> list2 = ArrivalDAO.searchArrivalAir();
+					session.setAttribute("list2", list2);
+				%>
+				<select name="area">
+					<c:forEach items="${sessionScope.list2}" var="data" >
+						<option value="seoul">${data.airport} &nbsp;</option>
+					</c:forEach>
 				</select>
 				 &nbsp&nbsp&nbsp->&nbsp&nbsp&nbsp
 				<select name="area">
@@ -71,8 +88,14 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
           </div>
           <div class="w3-half">
             <label><i class="fa fa-calendar-o"></i> 도착 일/시 <br>
-				<select name="area">
-					<option value="seoul">서울&nbsp&nbsp &nbsp &nbsp &nbsp &nbsp</option>
+				<% 
+					List<String> list3 = ArrivalDAO.searchArrivalDate();
+					session.setAttribute("list3", list3);
+				 %> 
+				<select>
+					<c:forEach items="${sessionScope.list3}" var="data" >
+						<option>${data.airport} &nbsp;</option>
+					</c:forEach>
 				</select>
 			</label>
           </div>
