@@ -113,7 +113,7 @@ button {
 <body>
 	
      <div class="w3-container w3-center">
-  <form class="modal-content animate" action="index.html">
+  <form class="modal-content animate" action="user" method="post" >
     <div class="imgcontainer">
     </div>
      <div class="container">
@@ -121,7 +121,7 @@ button {
       <input type="text" placeholder="Enter Id" name="id" required>
 
       <label><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" name="pw" required>
+      <input type="password" placeholder="Enter Password" name="pwd" required>
       
       <label><b>Name</b></label>
       <input type="text" placeholder="Enter Name" name="name" required>
@@ -132,6 +132,7 @@ button {
       <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
 
       <div class="clearfix">
+      <input type="hidden" name="command" value="join" >
         <button type="submit" class="signupbtn">Sign Up</button>
         <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
       </div>
