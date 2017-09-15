@@ -1,5 +1,8 @@
 package dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
 import javax.sql.DataSource;
 
 import dto.ArrivalDTO;
@@ -18,6 +21,8 @@ public class ArrivalDAO {
 	
 	/** 도착항공편 조회 */
 	public static void searchArrivalAir(ArrivalDTO adt) {
-		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String query = "SELECT ";
 	}
 }
