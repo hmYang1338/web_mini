@@ -2,6 +2,7 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.sql.DataSource;
@@ -20,6 +21,27 @@ public class BookingInfoDAO {
 		return bookinginfoDAO;
 	}
 	
+	public static void insertBooking(BookingInfoDTO bto) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String query = "INSERT INTO bookinginfo VALUES(?,?,?,?,?,?)";
+		try{
+			con = DBUtil.getConnection();
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, bto.getBookingCode());
+			pstmt.setString(2, bto.getId());
+			pstmt.setString(3, bto.getAFlightID());
+			pstmt.setString(4, bto.getAScheduledateTime());
+			pstmt.setString(5, bto.getDFlightID());
+			pstmt.setString(6, bto.getDScheduledateTime());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(con, pstmt);
+		}
+	}
+	
+	
 	/**
 	 * 예약정보 확인
 	 * @param bto
@@ -27,19 +49,18 @@ public class BookingInfoDAO {
 	public static void searchBooking(BookingInfoDTO bto) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		ResultSet rset = null;
 		String query = "SELECT * FROM bookingInfo WHERE = ?";
 		
 		try {
 			con = DBUtil.getConnection();
-			
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, bto.getId());
-			pstmt.executeQuery();
-			
+			rset = pstmt.executeQuery();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			DBUtil.close(con, pstmt);
+			DBUtil.close(con, pstmt, rset);
 		}
 	}
 	

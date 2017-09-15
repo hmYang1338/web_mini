@@ -9,12 +9,19 @@ public class UserDTO {
 	public UserDTO() {
 		super();
 	}
+	/** 회원가입 및 회원수정을 위한 생성자 */
 	public UserDTO(String id, String pwd, String name, String email) {
 		super();
 		this.id = id;
 		this.pwd = pwd;
 		this.name = name;
 		this.email = email;
+	}
+	/** 로그인 검증을 위한 생성자*/
+	public UserDTO(String id, String pwd) {
+		super();
+		this.id = id;
+		this.pwd = pwd;
 	}
 	
 	public String getId() {

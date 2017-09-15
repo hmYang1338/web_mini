@@ -104,7 +104,7 @@ public class UserDAO {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = "SELECT id, pwd FROM users WHERE id = ? ";
+		String query = "SELECT id, pwd FROM users WHERE id = ? && pwd = ?";
 		try {
 			con = DBUtil.getConnection();
 			
