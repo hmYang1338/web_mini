@@ -1,28 +1,71 @@
 package service;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.ArrivalDAO;
+import dao.DepartDAO;
+
 @WebServlet("/aircraft")
 public class AircraftService extends HttpServlet {
 
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void service(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 
 		String command = request.getParameter("command");
 
-		if (command.equals("join")) {
-//			insert(request, response);
-		} else if (command.equals("delete")) {
-//			delete(request, response);
+		if (command.equals("searcharrive")) {
+			searchDepartDate(request, response);
+		} else if (command.equals("searchdepart")) {
+			searchArriveDate(request, response);
 		}
 	} // end of service
 
-	public void searchDepartDate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	/**
+	 * 출발일시 찾기
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	public void searchDepartDate(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		String airport = request.getParameter("airport").trim();
+		ArrayList<String> list = null;
+		try {
+			list = DepartDAO.searchDepartDate(airport);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		request.getRequestDispatcher(list.toString()).forward(request, response);
 	}
-	
+
+	/**
+	 * 도착일시 찾기
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	public void searchArriveDate(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		String airport = request.getParameter("airport").trim();
+		ArrayList<String> list = null;
+		try {
+			list = ArrivalDAO.searchArrivalDate(airport);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		request.getRequestDispatcher(list.toString()).forward(request, response);
+	}
 }
