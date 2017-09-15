@@ -27,7 +27,7 @@ button {
     background-color: #ffffff;
     color: red;
     padding: 14px 20px;
-    margin: 8px 0;
+    margin: 0;
     border: none;
     cursor: pointer;
     width: 100%;
@@ -38,11 +38,7 @@ button:hover {
 }
 
 /* Extra styles for the cancel button */
-.cancelbtn {
-    width: auto;
-    padding: 10px 18px;
-    background-color: #ffffff;
-}
+.cancelbtn,.loginbtn {float:left;width:50%}
 
 /* Center the image and position the close button */
 .imgcontainer {
@@ -57,7 +53,7 @@ img.avatar {
 }
 
 .container {
-    padding: 16px;
+    padding: 40px;
 }
 
 span.psw {
@@ -136,46 +132,38 @@ span.psw {
 <!-- Navigation Bar -->
 <div class="w3-bar w3-white w3-large">
   <a href="index.html" class="w3-bar-item w3-button w3-red w3-mobile">Main</a>
-  
-  <a href="add.jsp" class="w3-bar-item w3-button w3-right w3-mobile">Sign Up</a>
-  <a href="login.jsp" class="w3-bar-item w3-button w3-right w3-mobile">Login</a>
+    <a href="add.jsp" class="w3-bar-item w3-button w3-right w3-mobile">Sign Up</a>
+  <button onclick="document.getElementById('id01').style.display='block'" class="w3-bar-item w3-button w3-right w3-mobile" style="width:auto;">Login</button>
 </div>
 </head>
 <body>
-	<h2>
-	<button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
-	<== 로그인하려면 누르세요
-	</h2>
 	
 	 <div class="w3-container w3-center">
-<img class="w3-image " src="img/airport2.jpg" alt="The Hotel" style="min-width:1000px" width="1500" height="800">
-     </div>
-	
-	<div id="id01" class="modal">
-  
-  <form class="modal-content animate" action="index.html">
+	 <form class="modal-content animate" action="index.html">
     <div class="imgcontainer">
-      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-      <img src="img_avatar2.png" alt="Avatar" class="avatar">
+      <img src="img_avatar2.png" alt="Login" class="avatar">
     </div>
 
     <div class="container">
-      <label><b>Username</b></label>
-      <input type="text" placeholder="Enter Username" name="uname" required>
+      <label><b>User ID</b></label>
+      <input type="text" placeholder="Enter Userid" name="uname" required>
 
       <label><b>Password</b></label>
       <input type="password" placeholder="Enter Password" name="psw" required>
         
-      <button type="submit">Login</button>
-      <input type="checkbox" checked="checked"> Remember me
+      <input type="checkbox" checked="checked" class="psw" > Remember me
+      <span class="psw">Forgot <a href="findID.jsp">id or password?</a></span>
+    <div class="container" style="background-color:#ffffff">
+      <button type="submit" class="loginbtn">Login</button>
+        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+    </div>
     </div>
 
-    <div class="container" style="background-color:#ffffff">
-      <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-      <span class="psw">Forgot <a href="findID.jsp">id or password?</a></span>
-    </div>
   </form>
-</div>
+     </div>
+	
+  
+  
 
 <script>
 // Get the modal

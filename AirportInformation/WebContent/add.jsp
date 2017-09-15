@@ -27,7 +27,7 @@ button {
     background-color: #ffffff;
     color: red;
     padding: 14px 20px;
-    margin: 8px 0;
+    margin: 0;
     border: none;
     cursor: pointer;
     width: 100%;
@@ -105,26 +105,18 @@ button {
 <!-- Navigation Bar -->
 <div class="w3-bar w3-white w3-large">
   <a href="index.html" class="w3-bar-item w3-button w3-red w3-mobile">Main</a>
-  
-  <a href="add.jsp" class="w3-bar-item w3-button w3-right w3-mobile">Sign Up</a>
-  <a href="login.jsp" class="w3-bar-item w3-button w3-right w3-mobile">Login</a>
+  <button onclick="document.getElementById('id01').style.display='block'" class="w3-bar-item w3-button w3-right w3-mobile" style="width:auto;">Sign Up</button>
+<a href="login.jsp" class="w3-bar-item w3-button w3-right w3-mobile">Login</a>
 </div>
 
 </head>
 <body>
-	<h2>
-	<button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Sign Up</button>
-	<== 회원가입 하시길 원하시면 누르세요
-	</h2>
 	
      <div class="w3-container w3-center">
-<img class="w3-image " src="img/airport1.jpg" alt="The Hotel" style="min-width:1000px" width="1500" height="800">
-     </div>
-
-<div id="id01" class="modal">
-  <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">×</span>
   <form class="modal-content animate" action="index.html">
-    <div class="container">
+    <div class="imgcontainer">
+    </div>
+     <div class="container">
       <label><b>Id</b></label>
       <input type="text" placeholder="Enter Id" name="id" required>
 
@@ -136,16 +128,17 @@ button {
 
       <label><b>Email</b></label>
       <input type="text" placeholder="Enter Email" name="email" required>
-      <input type="checkbox" checked="checked"> Remember me
+      
       <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
 
       <div class="clearfix">
-        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
         <button type="submit" class="signupbtn">Sign Up</button>
+        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
       </div>
     </div>
   </form>
-</div>
+     </div>
+
 
 <script>
 // Get the modal
