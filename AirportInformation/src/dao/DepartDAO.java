@@ -13,7 +13,6 @@ import util.DBUtil;
 
 public class DepartDAO {
 	private static DepartDAO departDAO;
-	private static DataSource source = null;
 
 	public DepartDAO() {}
 	public static DepartDAO getInstance() {
@@ -39,7 +38,7 @@ public class DepartDAO {
 		String query = "SELECT dscheduledatetime FROM departinfo WHERE airport = ?";
 		
 		try {
-			con = source.getConnection();
+			con = DBUtil.getConnection();
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, airport);
 			rset = pstmt.executeQuery();

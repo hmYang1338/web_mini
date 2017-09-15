@@ -15,7 +15,6 @@ import util.DBUtil;
  */
 public class UserDAO {
 	private static UserDAO userDAO;
-	private static DataSource source = null;
 	
 	private UserDAO() {}
 	public static UserDAO getInstance() {
@@ -34,7 +33,7 @@ public class UserDAO {
 		PreparedStatement pstmt = null;
 		String query = "INSERT INTO users VALUES(?,?,?,?)";
 		try {
-			con = source.getConnection();
+			con = DBUtil.getConnection();
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, udo.getId());
 			pstmt.setString(2, udo.getPwd());
@@ -58,7 +57,7 @@ public class UserDAO {
 		PreparedStatement pstmt = null;
 		String query = "DELETE FROM users WHERE id = ? && email = ?";
 		try {
-			con = source.getConnection();
+			con = DBUtil.getConnection();
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, id);
 			pstmt.setString(2, email);
@@ -80,7 +79,7 @@ public class UserDAO {
 		PreparedStatement pstmt = null;
 		String query = "UPDATE users SET password = ? , email = ? WHERE id = ?";
 		try {
-			con = source.getConnection();
+			con = DBUtil.getConnection();
 
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, udo.getPwd());
@@ -107,7 +106,7 @@ public class UserDAO {
 		ResultSet rset = null;
 		String query = "SELECT id, pwd FROM users WHERE id = ? ";
 		try {
-			con = source.getConnection();
+			con = DBUtil.getConnection();
 			
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, id);
@@ -131,7 +130,7 @@ public class UserDAO {
 		ResultSet rset = null;
 		String query = "SELECT * FROM users WHERE id = ? ";
 		try {
-			con = source.getConnection();
+			con = DBUtil.getConnection();
 
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, udo.getId());

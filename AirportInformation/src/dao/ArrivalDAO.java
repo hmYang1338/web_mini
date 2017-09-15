@@ -12,7 +12,6 @@ import util.DBUtil;
 
 public class ArrivalDAO {
 	private static ArrivalDAO arrivalDAO;
-	private static DataSource source = null;
 	
 	private ArrivalDAO() {}
 	public static ArrivalDAO getInstance() {
@@ -33,7 +32,7 @@ public class ArrivalDAO {
 		String query = "SELECT * FROM arrivalInfo";
 		
 		try {
-			con = source.getConnection();
+			con = DBUtil.getConnection();
 			
 			pstmt = con.prepareStatement(query);
 			rset = pstmt.executeQuery();

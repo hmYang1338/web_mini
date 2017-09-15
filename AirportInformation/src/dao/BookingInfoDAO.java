@@ -11,7 +11,6 @@ import util.DBUtil;
 
 public class BookingInfoDAO {
 	private static BookingInfoDAO bookinginfoDAO;
-	private static DataSource source = null;
 
 	public BookingInfoDAO() {}
 	public static BookingInfoDAO getInstance() {
@@ -31,7 +30,7 @@ public class BookingInfoDAO {
 		String query = "SELECT * FROM bookingInfo WHERE = ?";
 		
 		try {
-			con = source.getConnection();
+			con = DBUtil.getConnection();
 			
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, bto.getId());
