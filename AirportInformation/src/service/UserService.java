@@ -44,10 +44,14 @@ public class UserService extends HttpServlet {
 		UserDTO udo = new UserDTO(id, pwd, name, email);
 		String url = null;	
 		
-		try {			
-			UserDAO.userInsert(udo);			
-			request.setAttribute("udo", udo);
-			url = "index.html";
+		try {
+			if(id.equals(udo.getId())){
+				UserDAO.userInsert(udo);			
+				request.setAttribute("udo", udo);
+				url = "index.html";
+			} else {
+				
+			}
 		} catch (SQLException e) {		
 			request.setAttribute("error", "입력 실패");
 			url = "error.jsp";
