@@ -28,7 +28,7 @@ public class UserDAO {
 	 * 회원가입
 	 * @throws SQLException 
 	 */
-	public static void userInsert(UserDTO udo) throws SQLException {
+	public static int userInsert(UserDTO udo) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		String query = "INSERT INTO users VALUES(?,?,?,?)";
@@ -46,6 +46,7 @@ public class UserDAO {
 		} finally {
 			DBUtil.close(con, pstmt);
 		}
+		return 1;
 	}
 
 	/**
@@ -100,7 +101,7 @@ public class UserDAO {
 	 * 로그인
 	 * @throws SQLException 
 	 */
-	public void userLogin(UserDTO udo) throws SQLException {
+	public static void userLogin(String id, String pwd) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		String query = "SELECT id, pwd FROM users WHERE id = ? ";
@@ -108,7 +109,8 @@ public class UserDAO {
 			con = source.getConnection();
 			
 			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, udo.getId());
+			pstmt.setString(1, id);
+			pstmt.setString(2, pwd);
 			pstmt.executeQuery();
 		} catch (SQLException s) {
 			s.printStackTrace();
@@ -122,7 +124,7 @@ public class UserDAO {
 	 * 내정보 보기
 	 * @throws SQLException 
 	 */
-	public void userInfo(UserDTO udo) throws SQLException {
+	public static void userInfo(UserDTO udo) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		String query = "SELECT * FROM users WHERE id = ? ";

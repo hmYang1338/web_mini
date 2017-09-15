@@ -6,35 +6,37 @@ import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
-import dto.ArrivalDTO;
+import dto.BookingInfoDTO;
 import util.DBUtil;
 
-public class ArrivalDAO {
-	private static ArrivalDAO arrivalDAO;
+public class BookingInfoDAO {
+	private static BookingInfoDAO bookinginfoDAO;
 	private static DataSource source = null;
-	
-	private ArrivalDAO() {}
-	public static ArrivalDAO getInstance() {
-		if(arrivalDAO == null) {
-			arrivalDAO = new ArrivalDAO();
+
+	public BookingInfoDAO() {}
+	public static BookingInfoDAO getInstance() {
+		if (bookinginfoDAO == null) {
+			bookinginfoDAO = new BookingInfoDAO();
 		}
-		return arrivalDAO;
+		return bookinginfoDAO;
 	}
 	
 	/**
-	 * 도착항공편 조회
-	 * @param adt
+	 * 예약정보 확인
+	 * @param bto
 	 */
-	public static void searchArrivalAir(ArrivalDTO adt) {
+	public static void searchBooking(BookingInfoDTO bto) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		String query = "SELECT * FROM arrivalInfo";
+		String query = "SELECT * FROM bookingInfo WHERE = ?";
 		
 		try {
 			con = source.getConnection();
 			
 			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, bto.getId());
 			pstmt.executeQuery();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
