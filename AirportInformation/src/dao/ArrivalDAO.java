@@ -32,7 +32,7 @@ public class ArrivalDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<ArrivalBean> allList = new ArrayList<ArrivalBean>();
-		String query = "SELECT DISTINCT airport FROM arrivalInfo";
+		String query = "SELECT DISTINCT airport FROM arrivalInfo order by airport";
 		
 		try {
 			con = DBUtil.getConnection();

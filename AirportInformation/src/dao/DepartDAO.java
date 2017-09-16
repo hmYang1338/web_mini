@@ -31,7 +31,7 @@ public class DepartDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<DepartBean> allList = new ArrayList<DepartBean>();
-		String query = "SELECT DISTINCT airport FROM departInfo";
+		String query = "SELECT DISTINCT airport FROM departInfo ORDER BY airport";
 		
 		try {
 			con = DBUtil.getConnection();
