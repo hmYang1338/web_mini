@@ -7,28 +7,28 @@ import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
-import dto.UserDTO;
+import beans.UserBean;
 import util.DBUtil;
 
 /**
  * 회원가입, 회원탈퇴, 회원수정, 로그인 기능, 내정보 보기
  */
 public class UserDAO {
-	private static UserDAO userDAO;
+	private static UserDAO instance;
 	
 	private UserDAO() {}
 	public static UserDAO getInstance() {
-		if (userDAO == null) {
-			userDAO = new UserDAO();
+		if (instance == null) {
+			instance = new UserDAO();
 		}
-		return userDAO;
+		return instance;
 	}
 
 	/**
 	 * 회원가입
 	 * @throws SQLException 
 	 */
-	public static void userInsert(UserDTO udo) throws SQLException {
+	public static void userInsert(UserBean udo) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		String query = "INSERT INTO users VALUES(?,?,?,?)";
@@ -39,7 +39,8 @@ public class UserDAO {
 			pstmt.setString(2, udo.getPwd());
 			pstmt.setString(3, udo.getName());
 			pstmt.setString(4, udo.getEmail());
-			pstmt.executeUpdate();
+			
+			pstmt.executeUpdate(); // 쿼리 실행
 		} catch (SQLException s) {
 			s.printStackTrace();
 			throw s;
@@ -74,7 +75,7 @@ public class UserDAO {
 	 * 회원 수정
 	 * @throws SQLException 
 	 */
-	public static void userUpdate(UserDTO udo) throws SQLException {
+	public static void userUpdate(UserBean udo) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		String query = "UPDATE users SET password = ? , email = ? WHERE id = ?";
@@ -100,31 +101,37 @@ public class UserDAO {
 	 * 로그인
 	 * @throws SQLException 
 	 */
-	public static void userLogin(String id, String pwd) throws SQLException {
+	public static boolean userLogin(String id, String pwd) throws SQLException {
+		String pass = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = "SELECT id, pwd FROM users WHERE id = ? && pwd = ?";
+		String query = "SELECT * FROM users WHERE id = ?";
 		try {
 			con = DBUtil.getConnection();
 			
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, id);
-			pstmt.setString(2, pwd);
 			rset = pstmt.executeQuery();
+			rset.next();
+			pass = rset.getString("pwd");
 		} catch (SQLException s) {
 			s.printStackTrace();
 			throw s;
 		} finally {
 			DBUtil.close(con, pstmt, rset);
+			if(pass.equals(pwd)) {
+				return true;
+			}
 		}
+		return false;
 	} 
 
 	/**
 	 * 내정보 보기
 	 * @throws SQLException 
 	 */
-	public static void userInfo(UserDTO udo) throws SQLException {
+	public static void userInfo(UserBean udo) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;

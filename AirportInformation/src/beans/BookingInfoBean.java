@@ -1,6 +1,6 @@
-package dto;
+package beans;
 
-public class BookingInfoDTO {
+public class BookingInfoBean {
 	private String bookingCode;
 	private String id;
 	private String AFlightID;
@@ -8,8 +8,8 @@ public class BookingInfoDTO {
 	private String DFlightID;
 	private String DScheduledateTime;
 	
-	public BookingInfoDTO() {}
-	public BookingInfoDTO(String bookingCode, String id, String aFlightID, String aScheduledateTime, String dFlightID,
+	public BookingInfoBean() {}
+	public BookingInfoBean(String bookingCode, String id, String aFlightID, String aScheduledateTime, String dFlightID,
 			String dScheduledateTime) {
 		super();
 		this.bookingCode = bookingCode;

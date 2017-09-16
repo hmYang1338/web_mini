@@ -10,8 +10,8 @@ import javax.sql.DataSource;
 
 import org.eclipse.jdt.internal.compiler.ast.ArrayAllocationExpression;
 
-import dto.ArrivalDTO;
-import dto.DepartDTO;
+import beans.ArrivalBean;
+import beans.DepartBean;
 import util.DBUtil;
 
 public class DepartDAO {
@@ -30,7 +30,7 @@ public class DepartDAO {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		ArrayList<DepartDTO> allList = new ArrayList<DepartDTO>();
+		ArrayList<DepartBean> allList = new ArrayList<DepartBean>();
 		String query = "SELECT DISTINCT airport FROM departInfo";
 		
 		try {
@@ -39,7 +39,7 @@ public class DepartDAO {
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
-				allList.add(new DepartDTO(rset.getString(1)));
+				allList.add(new DepartBean(rset.getString(1)));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -53,7 +53,7 @@ public class DepartDAO {
 	/** 출발날짜 검색 
 	 * @throws SQLException */
 	public static ArrayList searchDepartDate() throws SQLException {
-		ArrayList<DepartDTO> list = new ArrayList<DepartDTO>();
+		ArrayList<DepartBean> list = new ArrayList<DepartBean>();
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -65,7 +65,7 @@ public class DepartDAO {
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
-				list.add(new DepartDTO(rset.getString(1)));
+				list.add(new DepartBean(rset.getString(1)));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

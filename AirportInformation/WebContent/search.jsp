@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>search.jsp</title>
+<title>항공권 검색</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="css/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
@@ -12,17 +12,15 @@
 <style>
 body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
 </style>
-<body class="w3-light-grey">
-
-<!-- Navigation Bar -->
-<div class="w3-bar w3-white w3-large">
-  <a href="index.html" class="w3-bar-item w3-button w3-red w3-mobile">Main</a>
-  
-  <a href="add.jsp" class="w3-bar-item w3-button w3-right w3-mobile">Join</a>
-  <a href="login.jsp" class="w3-bar-item w3-button w3-right w3-mobile">Login</a>
-</div>
 </head>
-<body>
+
+<body class="w3-light-grey">
+	<div class="w3-bar w3-white w3-large">
+		<a href="index.jsp" class="w3-bar-item w3-button w3-red w3-mobile">Main</a>
+		<a href="add.jsp" class="w3-bar-item w3-button w3-right w3-mobile">SignUp</a>
+		<a href="login.jsp" class="w3-bar-item w3-button w3-right w3-mobile">Login</a>
+	</div>
+
 	검색할 것입니다
 </body>
 </html>

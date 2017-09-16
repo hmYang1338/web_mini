@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
-import dto.BookingInfoDTO;
+import beans.BookingInfoBean;
 import util.DBUtil;
 
 public class BookingInfoDAO {
@@ -21,7 +21,7 @@ public class BookingInfoDAO {
 		return bookinginfoDAO;
 	}
 	
-	public static void insertBooking(BookingInfoDTO bto) {
+	public static void insertBooking(BookingInfoBean bto) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		String query = "INSERT INTO bookinginfo VALUES(?,?,?,?,?,?)";
@@ -46,7 +46,7 @@ public class BookingInfoDAO {
 	 * 예약정보 확인
 	 * @param bto
 	 */
-	public static void searchBooking(BookingInfoDTO bto) {
+	public static void searchBooking(BookingInfoBean bto) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;

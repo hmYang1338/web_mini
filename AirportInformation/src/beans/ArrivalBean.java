@@ -1,20 +1,20 @@
-package dto;
+package beans;
 
-public class ArrivalDTO {
+public class ArrivalBean {
 	private String AFlightID;
 	private String AScheduledateTime;
 	private String airline;
 	private String airport;
 	
-	public ArrivalDTO() {}
-	public ArrivalDTO(String aFlightID, String aScheduledateTime, String airline, String airport) {
+	public ArrivalBean() {}
+	public ArrivalBean(String aFlightID, String aScheduledateTime, String airline, String airport) {
 		super();
 		AFlightID = aFlightID;
 		AScheduledateTime = aScheduledateTime;
 		this.airline = airline;
 		this.airport = airport;
 	}
-	public ArrivalDTO(String airport) {
+	public ArrivalBean(String airport) {
 		super();
 		this.airport = airport;
 	}

@@ -1,16 +1,16 @@
-package dto;
+package beans;
 
-public class UserDTO {
+public class UserBean {
 	private String id;
 	private String pwd;
 	private String name;
 	private String email;
 	
-	public UserDTO() {
+	public UserBean() {
 		super();
 	}
 	/** 회원가입 및 회원수정을 위한 생성자 */
-	public UserDTO(String id, String pwd, String name, String email) {
+	public UserBean(String id, String pwd, String name, String email) {
 		super();
 		this.id = id;
 		this.pwd = pwd;
@@ -18,7 +18,7 @@ public class UserDTO {
 		this.email = email;
 	}
 	/** 로그인 검증을 위한 생성자*/
-	public UserDTO(String id, String pwd) {
+	public UserBean(String id, String pwd) {
 		super();
 		this.id = id;
 		this.pwd = pwd;

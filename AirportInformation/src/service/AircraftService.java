@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import beans.ArrivalBean;
 import dao.ArrivalDAO;
 import dao.DepartDAO;
-import dto.ArrivalDTO;
 
 @WebServlet("/aircraft")
 public class AircraftService extends HttpServlet {

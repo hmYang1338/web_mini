@@ -1,20 +1,20 @@
-package dto;
+package beans;
 
-public class DepartDTO {
+public class DepartBean {
 	private String DFlightID;
 	private String DScheduledateTime;
 	private String airline;
 	private String airport;
 	
-	public DepartDTO() {}
-	public DepartDTO(String dFlightID, String dScheduledateTime, String airline, String airport) {
+	public DepartBean() {}
+	public DepartBean(String dFlightID, String dScheduledateTime, String airline, String airport) {
 		super();
 		DFlightID = dFlightID;
 		DScheduledateTime = dScheduledateTime;
 		this.airline = airline;
 		this.airport = airport;
 	}
-	public DepartDTO(String airport) {
+	public DepartBean(String airport) {
 		super();
 		this.airport = airport;
 	}

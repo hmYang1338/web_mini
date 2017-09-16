@@ -9,7 +9,7 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
-import dto.ArrivalDTO;
+import beans.ArrivalBean;
 import util.DBUtil;
 
 public class ArrivalDAO {
@@ -31,7 +31,7 @@ public class ArrivalDAO {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		ArrayList<ArrivalDTO> allList = new ArrayList<ArrivalDTO>();
+		ArrayList<ArrivalBean> allList = new ArrayList<ArrivalBean>();
 		String query = "SELECT DISTINCT airport FROM arrivalInfo";
 		
 		try {
@@ -40,7 +40,7 @@ public class ArrivalDAO {
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
-				allList.add(new ArrivalDTO(rset.getString(1)));
+				allList.add(new ArrivalBean(rset.getString(1)));
 			}
 			
 		} catch (SQLException e) {
@@ -54,7 +54,7 @@ public class ArrivalDAO {
 	/** 도착날짜 검색 
 	 * @throws SQLException */
 	public static ArrayList searchArrivalDate() throws SQLException {
-		ArrayList<ArrivalDTO> list = new ArrayList<ArrivalDTO>();
+		ArrayList<ArrivalBean> list = new ArrayList<ArrivalBean>();
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -66,7 +66,7 @@ public class ArrivalDAO {
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
-				list.add(new ArrivalDTO(rset.getString(1)));
+				list.add(new ArrivalBean(rset.getString(1)));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

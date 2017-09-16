@@ -24,17 +24,12 @@ public class BookingService extends HttpServlet {
 	
 	public void bookingInfo(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String bookingCode = request.getParameter("bookingCode").trim();
-		String id = request.getParameter("id").trim();
-		String AFlightID = request.getParameter("AFlightID").trim();
-		String AScheduledateTime = request.getParameter("AScheduledateTime").trim();
-		String DFlightID = request.getParameter("DFlightID").trim();
-		String DScheduledateTime = request.getParameter("DScheduledateTime").trim();
+		String DFlightID = request.getParameter("departList").trim();
+		String DScheduledateTime = request.getParameter("departDate").trim();
+		String AFlightID = request.getParameter("arrivalList").trim();
+		String AScheduledateTime = request.getParameter("arrivalDate").trim();
 	
-		ArrayList<String> list = null;
-		/*try {
-			list = BookingInfoDAO.searchBooking(bto);
-		}*/
+		request.getRequestDispatcher("search.jsp").forward(request, response);
 	}
 
 }
