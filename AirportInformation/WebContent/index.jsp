@@ -1,4 +1,4 @@
-<%@page import="dao.DepartDAO, dao.ArrivalDAO, java.util.List, beans.ArrivalBean, java.util.ArrayList"%>
+<%@page import="dao.DepartDAO, dao.ArrivalDAO, java.util.List, java.util.HashMap, beans.ArrivalBean, java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -39,26 +39,25 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
 								<option value="inc">인천</option><!-- default -->
 							</select>&nbsp&nbsp&nbsp&nbsp&nbsp->&nbsp&nbsp&nbsp
 								<% 
-									List list = DepartDAO.searchDepartAir();
-									session.setAttribute("list", list);
+									//List list = DepartDAO.searchDepartAir();
+									//session.setAttribute("list", list);
+									
+									HashMap map = DepartDAO.searchDepartAir();
+									session.setAttribute("map", map);
 								%> <!-- 목적지 리스트 -->
-							<select name="departList" id="depart_selectEle">
-								<c:forEach items="${sessionScope.list}" var="data" >
-									<option value="">${data.airport} &nbsp;</option>
+							<select name="departList" id="departList_selectEle">
+								<c:forEach items="${sessionScope.map}" var="data" >
+									<option value="${data.value}">${data.key} &nbsp;</option>
 								</c:forEach>
+								<!-- <option value="">${data.airport} &nbsp;</option> -->
 							</select>
 							</label>
 						</div>
 						<div class="w3-half">
 							<label><i class="fa fa-calendar-o"></i> 출발 일/시 <br>
-								<% 
-									List list4 = DepartDAO.searchDepartDate();
-									session.setAttribute("list4", list4);
-								%> <!-- 인천에서 목적지로 출발하는 일/시 -->
-							<select name="departDate">
-								<c:forEach items="${sessionScope.list4}" var="data" >
-									<option value="">${data.airport} &nbsp;</option>
-								</c:forEach>
+								<!-- 인천에서 목적지로 출발하는 일/시 -->
+							<select name="departDate" id="departDate_selectEle">
+								<option value=""> &nbsp;</option>
 							</select>			
 							</label>
 						</div>
@@ -67,12 +66,16 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
 						<div class="w3-half w3-margin-bottom">
 							<label><i class="fa fa-calendar-o"></i>&nbsp&nbsp&nbsp&nbsp출발지 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp-> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 도착지 <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 								<% 
-									List<String> list2 = ArrivalDAO.searchArrivalAir();
-									session.setAttribute("list2", list2);
+									//List<String> list2 = ArrivalDAO.searchArrivalAir();
+									//session.setAttribute("list2", list2);
+									
+									HashMap map2 = ArrivalDAO.searchArrivalAir();
+									session.setAttribute("map", map2);
+									
 								%> <!-- 출발지 리스트 -->
-							<select name="arrivalList" id="arrival_selectEle">
-								<c:forEach items="${sessionScope.list2}" var="data" >
-									<option value="">${data.airport} &nbsp;</option>
+							<select name="arrivalList" id="arrivalList_selectEle">
+								<c:forEach items="${sessionScope.map}" var="data" >
+									<option value="${data.value}">${data.key} &nbsp;</option>
 								</c:forEach>
 							</select>&nbsp&nbsp&nbsp->&nbsp&nbsp&nbsp
 							<select>
@@ -82,14 +85,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
 						</div>
 						<div class="w3-half">
 							<label><i class="fa fa-calendar-o"></i> 도착 일/시 <br>
-								<% 
-									List list3 = ArrivalDAO.searchArrivalDate();
-									session.setAttribute("list3", list3);
-								%> <!-- 출발지에서 인천으로 도착하는 일/시 -->
-							<select name="arrivalDate">
-								<c:forEach items="${sessionScope.list3}" var="data" >
-									<option value="">${data.airport} &nbsp;</option>
-								</c:forEach>
+								<!-- 출발지에서 인천으로 도착하는 일/시 -->
+							<select name="arrivalDate" id="arrivalDate_selectEle">
+								<option value="">&nbsp;</option>
 							</select>
 							</label>
 						</div>
@@ -103,16 +101,40 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
 </html>
 
 <script>
-var depart_selectEle = document.getElementById("depart_selectEle");
-var arrival_selectEle = document.getElementById("arrival_selectEle");
+var departList_selectEle = document.getElementById("departList_selectEle");
+var departDate_selectEle = document.getElementById("departDate_selectEle");
+var arrivalList_selectEle = document.getElementById("arrivalList_selectEle");
+var arrivalDate_selectEle = document.getElementById("arrivalDate_selectEle");
 
-depart_selectEle.addEventListener('change', function(event) {
-	console.log("depart_selectEle onChange Envent : ", event);
-	arrival_selectEle.selectedIndex = this.selectedIndex;
+function setSelectBox(Element, value) {
+	console.log(Element, value);
+	var times = value.split(" ");
+	Element.innerHTML = "";
+	var option;
+	
+	for(var i = 0; i < times.length - 1; i++) {
+		option = document.createElement("option");        
+		option.text = times[i];
+		option.value = times[i];
+		Element.add(option);
+	}
+}
+
+departList_selectEle.addEventListener('change', function(event) {
+	console.log("departList_selectEle onChange Envent : ", event);
+	arrivalList_selectEle.selectedIndex = this.selectedIndex;
+	
+	setSelectBox(departDate_selectEle, this.value);
+	setSelectBox(arrivalDate_selectEle, arrivalList_selectEle.value);
 	
 }, false);
-arrival_selectEle.addEventListener('change', function(event) {
-	console.log("arrival_selectEle onChange Envent : ", event);
-	depart_selectEle.selectedIndex = this.selectedIndex;
+arrivalList_selectEle.addEventListener('change', function(event) {
+	console.log("arrivalList_selectEle onChange Envent : ", event);
+	departList_selectEle.selectedIndex = this.selectedIndex;
+	
+	setSelectBox(arrivalDate_selectEle, this.value);
+	setSelectBox(departDate_selectEle, departList_selectEle.value);
+	
 }, false);
+
 </script>
