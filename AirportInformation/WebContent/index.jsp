@@ -1,4 +1,4 @@
-<%@page import="dao.DepartDAO, dao.ArrivalDAO, java.util.List, dto.ArrivalDTO, java.util.ArrayList"%>
+<%@page import="dao.DepartDAO, dao.ArrivalDAO, java.util.List, beans.ArrivalBean, java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -42,7 +42,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
 									List list = DepartDAO.searchDepartAir();
 									session.setAttribute("list", list);
 								%> <!-- 목적지 리스트 -->
-							<select name="departList">
+							<select name="departList" id="depart_selectEle">
 								<c:forEach items="${sessionScope.list}" var="data" >
 									<option value="">${data.airport} &nbsp;</option>
 								</c:forEach>
@@ -70,7 +70,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
 									List<String> list2 = ArrivalDAO.searchArrivalAir();
 									session.setAttribute("list2", list2);
 								%> <!-- 출발지 리스트 -->
-							<select name="arrivalList">
+							<select name="arrivalList" id="arrival_selectEle">
 								<c:forEach items="${sessionScope.list2}" var="data" >
 									<option value="">${data.airport} &nbsp;</option>
 								</c:forEach>
@@ -101,3 +101,18 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
 	</header>
 </body>
 </html>
+
+<script>
+var depart_selectEle = document.getElementById("depart_selectEle");
+var arrival_selectEle = document.getElementById("arrival_selectEle");
+
+depart_selectEle.addEventListener('change', function(event) {
+	console.log("depart_selectEle onChange Envent : ", event);
+	arrival_selectEle.selectedIndex = this.selectedIndex;
+	
+}, false);
+arrival_selectEle.addEventListener('change', function(event) {
+	console.log("arrival_selectEle onChange Envent : ", event);
+	depart_selectEle.selectedIndex = this.selectedIndex;
+}, false);
+</script>
