@@ -18,57 +18,57 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
 </head>
 
 <body class="w3-light-grey">
-	<div class="w3-bar w3-white w3-large">
-		<a href="index.jsp" class="w3-bar-item w3-button w3-red w3-mobile">Main</a>
-		<a href="add.jsp" class="w3-bar-item w3-button w3-right w3-mobile">SignUp</a>
-		<a href="login.jsp" class="w3-bar-item w3-button w3-right w3-mobile">Login</a>
-	</div>
+   <div class="w3-bar w3-white w3-large">
+      <a href="index.jsp" class="w3-bar-item w3-button w3-red w3-mobile">Main</a>
+      <a href="add.jsp" class="w3-bar-item w3-button w3-right w3-mobile">SignUp</a>
+      <a href="login.jsp" class="w3-bar-item w3-button w3-right w3-mobile">Login</a>
+   </div>
 
-	<div class="w3-container">
-	<h2>출발편 항공정보 (인천공항 기준)</h2>
-		<table class="w3-table w3-striped w3-bordered">
-			 <tr>
-				<th>편명</th>
-				<th>출발 일/시</th>
-				<th>항공사</th>
-				<th>도착지</th>
-			</tr>
-			<% 
-				List allList = DepartDAO.getDepart();
-				session.setAttribute("allList", allList);
-			%>
-			<c:forEach items="${sessionScope.allList}" var="data">
-				<tr>
-					<td>${data.DFlightID}</td>
-					<td>${data.DScheduledateTime}</td>
-					<td>${data.airline}</td>
-					<td>${data.airport}</td>
-				</tr>
-			</c:forEach>
-		</table>
-		<br><hr><br>
-		
-		<h2>도착편 항공정보 (인천공항 기준)</h2>
-		<table class="w3-table w3-striped w3-bordered">
-			<tr>
-				<th>편명</th>
-				<th>출발 일/시</th>
-				<th>항공사</th>
-				<th>출발지</th>
-			</tr>
-			<% 
-				List allList2 = ArrivalDAO.getArrival();
-				session.setAttribute("allList", allList2);
-			%>
-			<c:forEach items="${sessionScope.allList}" var="data">
-				<tr>
-					<td>${data.AFlightID}</td>
-					<td>${data.AScheduledateTime}</td>
-					<td>${data.airline}</td>
-					<td>${data.airport}</td>
-				</tr>
-			</c:forEach>
-		</table>
-	</div>
+   <div class="w3-container">
+   <h2>출발편 항공정보 (인천공항 기준)</h2>
+      <table class="w3-table w3-striped w3-bordered">
+          <tr>
+            <th>편명</th>
+            <th>출발 일/시</th>
+            <th>항공사</th>
+            <th>도착지</th>
+         </tr>
+         <% 
+            List allList = DepartDAO.getDepart();
+            session.setAttribute("allList", allList);
+         %>
+         <c:forEach items="${sessionScope.allList}" var="data">
+            <tr>
+               <td>${data.DFlightID}</td>
+               <td>${data.DScheduledateTime}</td>
+               <td>${data.airline}</td>
+               <td>${data.airport}</td>
+            </tr>
+         </c:forEach>
+      </table>
+      <br><hr><br>
+      
+      <h2>도착편 항공정보 (인천공항 기준)</h2>
+      <table class="w3-table w3-striped w3-bordered">
+         <tr>
+            <th>편명</th>
+            <th>출발 일/시</th>
+            <th>항공사</th>
+            <th>출발지</th>
+         </tr>
+         <% 
+            List allList2 = ArrivalDAO.getArrival();
+            session.setAttribute("allList", allList2);
+         %>
+         <c:forEach items="${sessionScope.allList}" var="data">
+            <tr>
+               <td>${data.AFlightID}</td>
+               <td>${data.AScheduledateTime}</td>
+               <td>${data.airline}</td>
+               <td>${data.airport}</td>
+            </tr>
+         </c:forEach>
+      </table>
+   </div>
 </body>
 </html>

@@ -52,7 +52,7 @@ public class UserService extends HttpServlet {
 		try {
 			UserDAO.userInsert(dto);
 			request.setAttribute("dto", dto);
-			url = "login.jsp";
+			url = "mypage.jsp";
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

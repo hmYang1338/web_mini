@@ -13,7 +13,7 @@
 	지금 발생된 error는
 	<%=message%>입니다
 	
-	<a href="index.jsp">되돌아 가기</a>
+	<a href="add.jsp">되돌아 가기</a>
 	
 </body>
 </html>
