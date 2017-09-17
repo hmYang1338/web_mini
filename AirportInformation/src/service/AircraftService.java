@@ -27,6 +27,13 @@ public class AircraftService extends HttpServlet {
 		
 	} // end of service
 
+	/**
+	 * 
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
 	public void getList(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String url = null;
@@ -46,7 +53,5 @@ public class AircraftService extends HttpServlet {
 		
 		request.getRequestDispatcher(url).forward(request, response);
 	}
-	
-	
 	
 }

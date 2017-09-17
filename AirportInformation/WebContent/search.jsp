@@ -1,7 +1,8 @@
+<%@page import="dao.ArrivalDAO"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="beans.DepartBean, beans.ArrivalBean, service.AircraftService, java.util.*" %>
+<%@ page import="beans.DepartBean, beans.ArrivalBean, service.AircraftService, java.util.*, dao.DepartDAO" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -26,31 +27,17 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
 	<div class="w3-container">
 	<h2>출발편 항공정보 (인천공항 기준)</h2>
 		<table class="w3-table w3-striped w3-bordered">
-			<!-- <tr>
+			 <tr>
 				<th>편명</th>
 				<th>출발 일/시</th>
 				<th>항공사</th>
 				<th>도착지</th>
 			</tr>
-			<tr>
-				<td>KL856</td>
-				<td>201709140055 </td>
-				<td>케이엘엠네덜란드항공</td>
-				<td>암스테르담</td>
-			</tr>
-			<tr>
-				<td>AF8421</td>
-				<td>201709140055</td>
-				<td>에어 프랑스</td>
-				<td>암스테르담</td>
-			</tr>
-			<tr>
-				<td>KE5925</td>
-				<td>201709140055</td>
-				<td>대한항공</td>
-				<td>암스테르담</td>
-			</tr>  -->
-			<c:forEach items="${allList}" var="data">
+			<% 
+				List allList = DepartDAO.getDepart();
+				session.setAttribute("allList", allList);
+			%>
+			<c:forEach items="${sessionScope.allList}" var="data">
 				<tr>
 					<td>${data.DFlightID}</td>
 					<td>${data.DScheduledateTime}</td>
@@ -58,40 +45,30 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
 					<td>${data.airport}</td>
 				</tr>
 			</c:forEach>
-			
 		</table>
+		<br><hr><br>
 		
 		<h2>도착편 항공정보 (인천공항 기준)</h2>
 		<table class="w3-table w3-striped w3-bordered">
 			<tr>
 				<th>편명</th>
-				<th>도착 일/시</th>
+				<th>출발 일/시</th>
 				<th>항공사</th>
 				<th>출발지</th>
 			</tr>
-			<tr>
-				<td>KL855</td>
-				<td>201709201440 </td>
-				<td>케이엘엠네덜란드항공</td>
-				<td>암스테르담</td>
-			</tr>
-			<tr>
-				<td>AF8420</td>
-				<td>201709201440</td>
-				<td>에어 프랑스</td>
-				<td>암스테르담</td>
-			</tr>
-			<tr>
-				<td>KE5926</td>
-				<td>201709201440</td>
-				<td>대한항공</td>
-				<td>암스테르담</td>
-			</tr>
+			<% 
+				List allList2 = ArrivalDAO.getArrival();
+				session.setAttribute("allList", allList2);
+			%>
+			<c:forEach items="${sessionScope.allList}" var="data">
+				<tr>
+					<td>${data.AFlightID}</td>
+					<td>${data.AScheduledateTime}</td>
+					<td>${data.airline}</td>
+					<td>${data.airport}</td>
+				</tr>
+			</c:forEach>
 		</table>
-		
-		<br><hr><br>
-		
 	</div>
-	
 </body>
 </html>

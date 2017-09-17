@@ -135,7 +135,7 @@ public class DepartDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<DepartBean> allList = new ArrayList<DepartBean>();
-		String query = "select * from DEPARTINFO where AIRPORT='암스테르담' and DSCHEDULEDATETIME = '201709140055'";
+		String query = "select * from DEPARTINFO where AIRPORT='암스테르담' and DSCHEDULEDATETIME = '201709140055 '";
 		
 		try {
 			con = DBUtil.getConnection();
