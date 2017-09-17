@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.ArrivalBean;
+import beans.DepartBean;
 import dao.ArrivalDAO;
 import dao.DepartDAO;
 
@@ -22,58 +23,30 @@ public class AircraftService extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 
-		String command = request.getParameter("command");
-
-		if (command.equals("searcharrive")) {
-			searchDepartDate(request, response);
-		} else if (command.equals("searchdepart")) {
-			searchArriveDate(request, response);
-		}
+		getList(request, response);
+		
 	} // end of service
 
-	/**
-	 * 출발일시 찾기
-	 * @param request
-	 * @param response
-	 * @throws ServletException
-	 * @throws IOException
-	 */
-	public void searchDepartDate(HttpServletRequest request, HttpServletResponse response)
+	public void getList(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		String airport = request.getParameter("airport").trim();
-		ArrayList<String> list = null;
+		String url = null;
 		try {
-			list = DepartDAO.searchDepartDate();
+//			ArrayList<ArrivalBean> allList = ArrivalDAO.getArrival();
+			ArrayList<DepartBean> allList = DepartDAO.getDepart();
+			request.setAttribute("allList", allList);
+//			request.setAttribute("allList2", allList2);
+			
+			System.out.println(allList);
+//			System.out.println(allList2);
+			url = "search.jsp";
 		} catch (SQLException e) {
-			e.printStackTrace();
+			request.setAttribute("error", "도착정보실패");
+			url = "error.jsp";
 		}
-		request.getRequestDispatcher(list.toString()).forward(request, response);
+		
+		request.getRequestDispatcher(url).forward(request, response);
 	}
-
-	/**
-	 * 도착일시 찾기
-	 * @param request
-	 * @param response
-	 * @throws ServletException
-	 * @throws IOException
-	 */
-	public void searchArriveDate(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		
-		String airport = request.getParameter("airport").trim();
-		ArrayList<String> list = null;
-		try {
-			list = ArrivalDAO.searchArrivalDate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		request.getRequestDispatcher(list.toString()).forward(request, response);
 	
-//		ArrayList allList = ArrivalDAO.searchArrivalAir();
-//		request.setAttribute("allList", allList);
-		
-//		RequestDispatcher rdp = request.getRequestDispatcher(allList.toString());
-//		rdp.forward(request, response);
-	}
+	
+	
 }

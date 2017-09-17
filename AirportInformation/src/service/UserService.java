@@ -41,7 +41,6 @@ public class UserService extends HttpServlet {
 	 */
 	public void insert(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		HttpSession session = request.getSession(false);
 		String id = request.getParameter("id").trim();
 		String pwd = request.getParameter("pwd").trim();
 		String name = request.getParameter("name").trim();
@@ -96,6 +95,7 @@ public class UserService extends HttpServlet {
 	 */
 	public void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("id").trim();
+		String pwd = request.getParameter("pwd").trim();
 		String url = null;
 
 		try {

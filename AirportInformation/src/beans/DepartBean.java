@@ -47,7 +47,7 @@ public class DepartBean {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("DepartDTO [DFlightID=");
+		builder.append("DepartBean [DFlightID=");
 		builder.append(DFlightID);
 		builder.append(", DScheduledateTime=");
 		builder.append(DScheduledateTime);

@@ -102,16 +102,20 @@ public class UserDAO {
 	 * @throws SQLException 
 	 */
 	public static boolean userLogin(String id) throws SQLException {
+		String pass = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = "SELECT * FROM users WHERE id = ?";
+		String query = "SELECT id, pw FROM users WHERE id = ?";
 		try {
 			con = DBUtil.getConnection();
 			
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, id);
 			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				new UserBean(rset.getString(1), rset.getString(2));
+			}
 		} catch (SQLException s) {
 			s.printStackTrace();
 			throw s;

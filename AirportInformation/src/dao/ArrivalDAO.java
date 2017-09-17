@@ -6,12 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
-import javax.sql.DataSource;
 
 import beans.ArrivalBean;
-import beans.DepartBean;
 import util.DBUtil;
 
 public class ArrivalDAO {
@@ -128,4 +125,47 @@ public class ArrivalDAO {
 		return list;
 	}
 	
+	
+	/**
+	 * 도착항공편 리스트 출력
+	 * @return
+	 * @throws SQLException
+	 */
+	public static ArrayList<ArrivalBean> getArrival() throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<ArrivalBean> allList = new ArrayList<ArrivalBean>();
+		String query = "select * from ARRIVALINFO where AIRPORT='암스테르담' and ASCHEDULEDATETIME = '201709201440 '";
+		
+		try {
+			con = DBUtil.getConnection();
+			pstmt = con.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				allList.add(new ArrivalBean(rset.getString(1), rset.getString(2), rset.getString(3), rset.getString(4)));
+			}
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+			throw sqle;
+		} finally {
+			DBUtil.close(con, pstmt, rset);
+		}
+		return allList;
+	}
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

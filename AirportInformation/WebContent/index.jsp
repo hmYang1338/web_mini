@@ -31,7 +31,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
 				<h2>Flight Schedule</h2>
 			</div>
 			<div class="w3-container w3-white w3-padding-16">
-				<form action="booking" target="_blank" >
+				<form action="aircraft" target="_blank" method="post">
 					<div class="w3-row-padding" style="margin:0 -16px;">
 						<div class="w3-half w3-margin-bottom">
 							<label><i class="fa fa-calendar-o"></i> &nbsp&nbsp&nbsp&nbsp출발지 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp-> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 도착지 <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
