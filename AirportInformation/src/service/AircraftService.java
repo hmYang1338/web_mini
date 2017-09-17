@@ -61,19 +61,19 @@ public class AircraftService extends HttpServlet {
 	public void searchArriveDate(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-//		String airport = request.getParameter("airport").trim();
-//		ArrayList<String> list = null;
-//		try {
-//			list = ArrivalDAO.searchArrivalDate(airport);
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-//		request.getRequestDispatcher(list.toString()).forward(request, response);
+		String airport = request.getParameter("airport").trim();
+		ArrayList<String> list = null;
+		try {
+			list = ArrivalDAO.searchArrivalDate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		request.getRequestDispatcher(list.toString()).forward(request, response);
 	
-		ArrayList allList = ArrivalDAO.searchArrivalAir();
-		request.setAttribute("allList", allList);
+//		ArrayList allList = ArrivalDAO.searchArrivalAir();
+//		request.setAttribute("allList", allList);
 		
-		RequestDispatcher rdp = request.getRequestDispatcher(allList.toString());
-		rdp.forward(request, response);
+//		RequestDispatcher rdp = request.getRequestDispatcher(allList.toString());
+//		rdp.forward(request, response);
 	}
 }

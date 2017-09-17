@@ -96,21 +96,18 @@ public class UserService extends HttpServlet {
 	 */
 	public void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("id").trim();
-		String pwd = request.getParameter("pwd").trim();
 		String url = null;
 
 		try {
-			if(UserDAO.userLogin(id, pwd)) {
-				url = "mypage.jsp";
-			} else {
-				request.setAttribute("error", "입력 실패");
-				url = "error.jsp";
-			}
+			UserDAO.userLogin(id); 
+			url = "mypage.jsp";
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			request.setAttribute("error", "입력 실패");
+			url = "error.jsp";
 			e.printStackTrace();
 		}
 		request.getRequestDispatcher(url).forward(request, response);
+		
 	} // end of login
 
 } // end of class

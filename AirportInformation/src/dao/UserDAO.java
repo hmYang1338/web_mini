@@ -101,8 +101,7 @@ public class UserDAO {
 	 * 로그인
 	 * @throws SQLException 
 	 */
-	public static boolean userLogin(String id, String pwd) throws SQLException {
-		String pass = null;
+	public static boolean userLogin(String id) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -113,16 +112,11 @@ public class UserDAO {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, id);
 			rset = pstmt.executeQuery();
-			rset.next();
-			pass = rset.getString("pwd");
 		} catch (SQLException s) {
 			s.printStackTrace();
 			throw s;
 		} finally {
 			DBUtil.close(con, pstmt, rset);
-			if(pass.equals(pwd)) {
-				return true;
-			}
 		}
 		return false;
 	} 
