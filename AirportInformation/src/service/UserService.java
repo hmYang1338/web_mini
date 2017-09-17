@@ -101,7 +101,7 @@ public class UserService extends HttpServlet {
 
 		try {
 			if(UserDAO.userLogin(id, pwd)) {
-				url = "index.jsp";
+				url = "mypage.jsp";
 			} else {
 				request.setAttribute("error", "입력 실패");
 				url = "error.jsp";

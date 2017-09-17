@@ -7,6 +7,7 @@
 <title>booking.jsp</title>
 </head>
 <body>
-
+	예약 확인은 개뿔'
+	
 </body>
 </html>
