@@ -202,7 +202,7 @@ span.psw {
       
 			<div class="clearfix">
 				<button type="submit" class="signupbtn">Sign Up</button>
-				<button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+				<button type="button" onclick = "location.href = 'index.jsp'" class="cancelbtn">Cancel</button>
 			</div>
 		</div>
 	</form>

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>booking.jsp</title>
+<title>예약 확인</title>
 </head>
 <body>
 	예약 확인은 개뿔'

@@ -9,7 +9,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import beans.UserBean;
 import dao.UserDAO;
@@ -29,8 +28,38 @@ public class UserService extends HttpServlet {
 			delete(request, response);
 		} else if (command.equals("login")) {
 			login(request, response);
+		} else if (command.equals("update")) {
+			update(request, response);
 		}
 	}// end of service
+	
+	/**
+	 * 회원 정보 수정 메소드
+	 * 
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	public void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String id = request.getParameter("id").trim();
+		String pwd = request.getParameter("password").trim();
+		String name = request.getParameter("name").trim();
+		String email = request.getParameter("email").trim();		
+		UserBean dto = new UserBean(id, pwd, name, email);
+		String url = null;	
+		try {			
+			UserDAO.userUpdate(dto);			
+			request.setAttribute("dto", dto);
+			url = "updateSuccess.jsp";
+		} catch (SQLException e) {		
+			request.setAttribute("error", "입력 실패");
+			url = "error.jsp";
+			e.printStackTrace();
+		}
+		RequestDispatcher rdp = request.getRequestDispatcher(url);		
+		rdp.forward(request, response);
+	} // end of update
 
 	/**
 	 * 회원 가입 메소드
@@ -54,7 +83,6 @@ public class UserService extends HttpServlet {
 			request.setAttribute("dto", dto);
 			url = "mypage.jsp";
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			request.setAttribute("error", "입력 실패");
 			url = "error.jsp";
